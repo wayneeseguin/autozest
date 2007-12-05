@@ -1,2 +1,2 @@
 require "fileutils"
-require "../lib/autozest"
+require File.join(File.dirname(__FILE__), "../lib/autozest")

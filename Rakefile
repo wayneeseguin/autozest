@@ -22,7 +22,7 @@ Homepage = "http://autozest.rubyforge.org"
 ##############################################################################
 GEM_NAME = "AutoZest"
 GEM_VERSION = AutoZest::Version
-RDOC_OPTIONS = [
+RDocOptions = [
   "--quiet", "--title", "#{GEM_NAME}-#{GEM_VERSION} Reference", "--main", "README", "--inline-source"
 ]
 
@@ -53,7 +53,7 @@ task :release => [:package]
 
 spec =
 Gem::Specification.new do | specification |
-  specification.name = PluginName
+  specification.name = GemName
   specification.version = Version
   specification.platform = Gem::Platform::RUBY
   specification.has_rdoc = true
@@ -147,4 +147,58 @@ task :check_version do
     puts "Please update your version.rb to match the release version, currently #{GEM_VERSION}"
     exit
   end
+end
+
+##############################################################################
+# rSpec
+##############################################################################
+
+require "spec/rake/spectask"
+
+desc "Run specs with coverage"
+Spec::Rake::SpecTask.new("spec") do |spec_task|
+  spec_task.spec_opts  = File.read("spec/spec.opts").split("\n")
+  spec_task.spec_files = FileList["spec/*_spec.rb"].sort
+  spec_task.rcov       = true
+end
+
+desc "Run specs without coverage"
+Spec::Rake::SpecTask.new("spec_no_cov") do |spec_task|
+  spec_task.spec_opts  = File.read("spec/spec.opts").split("\n")
+  spec_task.spec_files = FileList["spec/*_spec.rb"].sort
+end
+
+desc "Run all specs with coverage"
+Spec::Rake::SpecTask.new("specs") do |spec_task|
+  spec_task.spec_opts  = File.read("spec/spec.opts").split("\n")
+  spec_task.spec_files = FileList["spec/**/*_spec.rb"].sort
+  spec_task.rcov       = true
+end
+
+desc "Run all specs without coverage"
+Spec::Rake::SpecTask.new("specs_no_cov") do |spec_task|
+  spec_task.spec_opts  = File.read("spec/spec.opts").split("\n")
+  spec_task.spec_files = FileList["spec/**/*_spec.rb"].sort
+end
+
+desc "Run all specs and output html"
+Spec::Rake::SpecTask.new("specs_html") do |spec_task|
+  spec_task.spec_opts  = ["--format", "html"]
+  spec_task.spec_files = Dir["spec/**/*_spec.rb"].sort
+end
+
+##############################################################################
+# Statistics
+##############################################################################
+
+STATS_DIRECTORIES = [
+  %w(Code   lib/),
+  %w(Spec   spec/)
+].collect { |name, dir| [ name, "./#{dir}" ] }.select { |name, dir| File.directory?(dir) }
+
+desc "Report code statistics (KLOCs, etc) from the application"
+task :stats do
+  require "extra/stats"
+  verbose = true
+  CodeStatistics.new(*STATS_DIRECTORIES).to_s
 end
