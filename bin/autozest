@@ -1,0 +1,3 @@
+#!/usr/bin/ruby
+
+# TODO: parse command line options and call appropriate module

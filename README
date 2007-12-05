@@ -1,0 +1,27 @@
+= About
+
+AutoZest is an autotest extension
+
+= Author
+
+  Wayne E. Seguin (wayneeseguin at gmail dot com)
+
+= Features
+
+* automated growl installation
+  $ autozest install growl
+
+* generation of .autotest with growl & autozest config
+  $ autozest setup autotest
+
+* generation of .autozest.yml config file
+  $ autozest setup
+
+* autozest.sqlite3 database file for pulling random messages based on severity, update via:
+  $ autozest update
+
+Notes:
+
+* config file can specify extra image fetching options
+* dependency: ZenTest
+
