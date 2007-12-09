@@ -1,3 +1,13 @@
 #!/usr/bin/ruby
 
-# TODO: parse command line options and call appropriate module
+# TODO: parse command line options and call appropriate modulerequire "rubigen"
+require "autozest"
+
+if %w(-v --version).include? ARGV.first
+  puts "#{File.basename($0)} #{AutoZest::VERSION::STRING}"
+  exit(0)
+end
+
+require "rubigen/scripts/generate"
+RubiGen::Base.use_application_sources!
+RubiGen::Scripts::Generate.new.run(ARGV, :generator => "autozest")
