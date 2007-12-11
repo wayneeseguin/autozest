@@ -73,14 +73,19 @@ module AutoZest
         ""
       end
 
+      # Parse the result string into examples, failures and pending
       def parse(autotest_results)
-        results = [autotest_results].flatten.join
         # TODO: Verifiy that test / test::unit both spitout errors in the 
         #       same order as rspec. If not we have to adjust below slightly.
-        #@examples, @failures, @pending = results.scan(/(\d+)/).map{ |d| d.first.to_i }
-        regex = /(\d+)\s+example(?:s)?,\s+(\d+)\s+failure(?:s)?,\s+(\d+)\s+pending/
-        match = results.scan(regex).first
-        @examples, @failures, @pending = match[0].to_i, match[1].to_i, match[2].to_i
+        results = [autotest_results].flatten.join
+
+        examples_match = results.scan(/(\d+)\s+example(?:s)?/).first
+        failures_match = results.scan(/(\d+)\s+failure(?:s)?/).first
+        pending_match  = results.scan(/(\d+)\s+pending/).first
+
+        @examples = examples_match.nil? ? 0 : examples_match.first.to_i
+        @failures = failures_match.nil? ? 0 : failures_match.first.to_i
+        @pending  = pending_match.nil?  ? 0 : pending_match.first.to_i
       end
 
     end
