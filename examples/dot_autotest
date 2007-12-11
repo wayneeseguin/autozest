@@ -4,8 +4,7 @@ require "autozest"
 
 module Autotest::Growl  
   Autotest.add_hook :ran_command do |auto_test|
-    # Send results to AutoZest
-    results = [auto_test.results].flatten.join("\n")
-    AutoZest::Notifier.notify!(results)
+    # Hand off notification to AutoZest
+    AutoZest::Notifier.notify!(auto_test.results)
   end
 end

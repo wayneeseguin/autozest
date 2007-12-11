@@ -7,6 +7,9 @@ require File.join(File.dirname(__FILE__), "spec_helper")
 
 describe AutoZest::Generator do
 
+  before(:each) do
+  end
+
   it "should generate an ~/.autotest config file for Growl"
 
   it "should generate an ~/.autozest config file"
@@ -14,6 +17,9 @@ describe AutoZest::Generator do
 end
 
 describe AutoZest::Notifier do # this is what does the work during autotest
+
+  before(:each) do
+  end
   
   it "should pull custom failure messages out of the sqllite database and send them to growl"
   
@@ -35,6 +41,9 @@ end
 
 describe AutoZest::Updater do
 
+  before(:each) do
+  end
+
   it "should update the autozest.sqlite3 database file from (rubyforge)?" do
     pending("implement notifier first")
   end
@@ -42,6 +51,9 @@ describe AutoZest::Updater do
 end
 
 describe AutoZest::Installer, "growl" do
+
+  before(:each) do
+  end
   
   it "should download & install growl" do
     pending("implement other features first")

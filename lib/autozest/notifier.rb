@@ -5,8 +5,10 @@ module AutoZest
       attr_accessor :examples, :failures, :pending
 
       # Sends the command to the console (Only supports Growl at the moment)
-      def notify!(results)
-        parse(results)
+      def notify!(autotest_results)
+
+        parse(autotest_results)
+
         # TODO: this should all come from config
         if AutoZest::Config[:notifier] == "gnome"
           # TODO: deal with it :-p
@@ -24,7 +26,7 @@ module AutoZest
       end
 
       private
-
+            
       # returns a message string based on the number of failures
       def message
         # for now we'll test with this
@@ -71,10 +73,14 @@ module AutoZest
         ""
       end
 
-      def parse(results)
+      def parse(autotest_results)
+        results = [autotest_results].flatten.join
         # TODO: Verifiy that test / test::unit both spitout errors in the 
         #       same order as rspec. If not we have to adjust below slightly.
-        @examples, @failures, @pending = results.scan(/(\d+)/).map{ |d| d.first.to_i }
+        #@examples, @failures, @pending = results.scan(/(\d+)/).map{ |d| d.first.to_i }
+        regex = /(\d+)\s+example(?:s)?,\s+(\d+)\s+failure(?:s)?,\s+(\d+)\s+pending/
+        match = results.scan(regex).first
+        @examples, @failures, @pending = match[0].to_i, match[1].to_i, match[2].to_i
       end
 
     end
