@@ -10,7 +10,7 @@ require "lib/autozest"
 # Constants
 ##############################################################################
 GemName  = "AutoZest"
-Version  = "0.0.1"
+Version  = AutoZest::Version
 Title    = "Refreshing Taunts"
 Summary  = "AutoZest < ZenTest::AutoTest extension for growl & custom messages"
 Authors  = "Wayne E. Seguin, Lance Carlson"
