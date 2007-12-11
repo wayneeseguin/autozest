@@ -2,7 +2,7 @@ require "autotest"
 
 class RspecCommandError < StandardError; end
 
-class AutoZest::AutozestRspec < AutoZest
+class Autotest::AutozestRspec < Autotest
   
   def initialize(kernel=Kernel, separator=File::SEPARATOR, alt_separator=File::ALT_SEPARATOR) # :nodoc:
     super()
