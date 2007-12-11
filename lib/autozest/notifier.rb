@@ -5,15 +5,16 @@ module AutoZest
       attr_accessor :examples, :failures, :pending
 
       # Sends the command to the console (Only supports Growl at the moment)
-      def notify!(title, message, image, sticky="")
+      def notify!(results)
+        parse(results)
         # TODO: this should all come from config
-        if AutoZest::Config.notifier == "gnome"
+        if AutoZest::Config[:notifier] == "gnome"
           # TODO: deal with it :-p
         else
           # default is growl
-          cmd = AutoZest::Config.notifier_uri
-          cmd << " -a #{AutoZest::Config.application}" # name of the app?
-          cmd << " -n #{AutoZest::Config.application}" # the name of the application that sends the notification, default: growlnotify
+          cmd = AutoZest::Config[:notifier_uri]
+          cmd << " -a #{AutoZest::Config[:application]}" # name of the app?
+          cmd << " -n #{AutoZest::Config[:application]}" # the name of the application that sends the notification, default: growlnotify
           cmd << " --image #{image}" if image
           cmd << " -m #{message}"
           cmd << " --title #{title}" unless title.empty?
@@ -64,12 +65,13 @@ module AutoZest
         # To be compatible with gNotify the following switch is accepted:
         #     -t,--title      Does nothing. Any text following will be treated as the
         #                     title because that's the default argument behaviour
+        ""
       end
 
-      def parse(string)
+      def parse(results)
         # TODO: Verifiy that test / test::unit both spitout errors in the 
         #       same order as rspec. If not we have to adjust below slightly.
-        @examples, @failures, @pending = string.scan(/(\d+)/).map{ |d| d.first.to_i }
+        @examples, @failures, @pending = results.scan(/(\d+)/).map{ |d| d.first.to_i }
       end
 
     end

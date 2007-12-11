@@ -3,6 +3,7 @@ require "erubis"
 #require "sequel"
 # http://code.google.com/p/ruby-sequel/wiki/CheatSheetrequire "#{File.dirname(__FILE__)}/autozest/installer"
 
+require "#{File.dirname(__FILE__)}/erubis_ext"
 require "#{File.dirname(__FILE__)}/autozest/config"
 require "#{File.dirname(__FILE__)}/autozest/notifier"
 require "#{File.dirname(__FILE__)}/autozest/updater"
