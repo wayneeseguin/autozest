@@ -4,8 +4,7 @@ module AutoZest
 
     # Setup config and read in yml configuration file.
     class << self      
-      @user ||= `whoami`.strip
-      @@config_file = "/Users/#{@user}/.autozest/config.yml"
+      @@config_file = "#{`echo $HOME`.strip}/.autozest/config.yml"
       @@config ||= Erubis.load_yaml_file(@@config_file)
 
       # Allow for calling keys as methods on Config object

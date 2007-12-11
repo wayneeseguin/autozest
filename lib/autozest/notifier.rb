@@ -16,9 +16,10 @@ module AutoZest
           cmd << " -a #{AutoZest::Config[:application]}" # name of the app?
           cmd << " -n #{AutoZest::Config[:application]}" # the name of the application that sends the notification, default: growlnotify
           cmd << " --image #{image}" if image
-          cmd << " -m #{message}"
+          cmd << " -m '#{message}'"
           cmd << " --title #{title}" unless title.empty?
         end
+        puts "AutoZest: <i> #{message}"
         system(cmd)
       end
 
@@ -53,9 +54,11 @@ module AutoZest
       def image
         # For now:
         if failures <= 0
-          "~/.autozest/images/pass.png"
+          # "~/.autozest/images/pass.png"
+          AutoZest::Config[:images][:pass_uri]
         elsif failures > 0
-          "~/.autozest/images/fail.png"
+          AutoZest::Config[:images][:fail_uri]
+          # "~/.autozest/images/fail.png"
         end
       end
 

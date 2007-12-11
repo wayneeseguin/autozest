@@ -1,6 +1,6 @@
 #!/bin/bash
-mkdir -P ~/.autozest/images
-cp ~/.autotest ~/.autotest.autozest.backup
-cp examples/dot_autotest ~/.autotest
-cp examples/config.yml ~/.autozest/config.yml
-cp images/*.png ~/.autozest/images/
+mkdir -p $HOME/.autozest/images
+cp $HOME/.autotest $HOME/.autotest.autozest.backup
+cp examples/dot_autotest $HOME/.autotest
+cp examples/config.yml $HOME/.autozest/config.yml
+cp images/*.png $HOME/.autozest/images/

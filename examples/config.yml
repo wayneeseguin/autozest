@@ -1,9 +1,10 @@
 # AutoZest configuration file.
 # ~/.autozest/config.yml
+<% @home_dir = `echo $HOME`.strip %>
 ---
   :application: autozest
   :notifier: growl
   :notifier_uri: /usr/local/bin/growlnotify
   :images:
-    :pass_uri: ~/.autozest/images/pass.png
-    :fail_uri: ~/.autozest/images/fail.png
+    :pass_uri: <%= @home_dir %>/.autozest/images/pass.png
+    :fail_uri: <%= @home_dir %>/.autozest/images/fail.png
