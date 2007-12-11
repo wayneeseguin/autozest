@@ -16,14 +16,14 @@ class Autotest::AutozestRspec < Autotest
       %r%^spec/.*_spec\.rb$% => kernel.proc { |filename, _| 
         filename 
       },
-      %r%^lib/merb/(.*)\.rb$% => kernel.proc { |_, m| 
-        ["spec/#{m[1]}_spec.rb", "spec/merb/#{m[1]}_spec.rb"] 
+      %r%^lib/autozest/(.*)\.rb$% => kernel.proc { |_, m| 
+        ["spec/#{m[1]}_spec.rb", "spec/autozest/#{m[1]}_spec.rb"] 
       },
-      %r%^lib/merb/mixins/(.*)\.rb$% => kernel.proc { |_, m| 
-        ["spec/#{m[1]}_spec.rb", "spec/merb/#{m[1]}_spec.rb",
-          "spec/merb/#{m[1]}_mixin_spec.rb"] 
+      %r%^lib/autozest/mixins/(.*)\.rb$% => kernel.proc { |_, m| 
+        ["spec/#{m[1]}_spec.rb", "spec/autozest/#{m[1]}_spec.rb",
+          "spec/autozest/#{m[1]}_mixin_spec.rb"] 
       },
-      %r%^lib/merb\.rb$% => kernel.proc { 
+      %r%^lib/autozest\.rb$% => kernel.proc { 
         files_matching %r%^spec/.*_spec\.rb$% 
       },
       %r%^spec/(spec_helper|shared/.*)\.rb$% => kernel.proc { 
@@ -95,6 +95,7 @@ class Autotest::AutozestRspec < Autotest
   def spec_commands
     [
       File.join("bin", "spec"),
+      File.join("usr","bin","spec"),
       File.join(Config::CONFIG["bindir"], "spec")
     ]
   end

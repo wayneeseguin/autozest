@@ -4,3 +4,5 @@ mtime
 --backtrace
 --format
 specdoc
+--diff
+
