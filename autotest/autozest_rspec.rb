@@ -70,7 +70,7 @@ class Autotest::AutozestRspec < Autotest
   end
   
   def add_options_if_present
-    File.exist?("specs/spec.opts") ? "-O specs/spec.opts " : ""
+    File.exist?("spec/spec.opts") ? "-O spec/spec.opts " : ""
   end
 
   # Finds the proper spec command to use.  Precendence
