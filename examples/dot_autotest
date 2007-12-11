@@ -1,0 +1,9 @@
+#!/usr/local/bin/ruby
+require "autotest"
+module Autotest::Growl
+  Autotest.add_hook :ran_command do |auto_test|
+    # Send results to AutoZest
+    results = [auto_test.results].flatten.join("\n")
+    AutoZest::Notifier.notify!(results)
+  end
+end

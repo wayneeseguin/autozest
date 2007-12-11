@@ -1,0 +1,9 @@
+# AutoZest configuration file.
+# ~/.autozest/config.yml
+---
+  :application: autozest
+  :notifier: growl
+  :notifier_uri: /usr/local/bin/growlnotify
+  :images:
+    :pass_uri: ~/.autozest/images/pass.png
+    :fail_uri: ~/.autozest/images/fail.png
