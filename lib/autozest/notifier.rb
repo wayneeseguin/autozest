@@ -1,3 +1,11 @@
+if RUBY_PLATFORM =~ /darwin/
+  require "ruby-growl"
+elsif RUBY_PLATFORM =~ /win/
+  # require "ruby-snarl"
+else
+  #*nix, gnotify?
+end
+
 module AutoZest
   class Notifier    
     class << self

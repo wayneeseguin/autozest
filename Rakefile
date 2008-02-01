@@ -29,6 +29,9 @@ RDocOptions = [
 @config_file = "~/.rubyforge/user-config.yml"
 @config = nil
 
+##############################################################################
+# Gem packaging
+##############################################################################
 def rubyforge_username
   unless @config
     begin
@@ -90,6 +93,9 @@ task "lib" do
   directory "lib"
 end
 
+##############################################################################
+# Installation & Uninstallation
+##############################################################################
 task :install do
   sh %{rake package}
   sh %{sudo gem install pkg/#{GEM_NAME}-#{GEM_VERSION}.gem}
@@ -99,11 +105,9 @@ task :uninstall do
   sh %{sudo gem uninstall #{GEM_NAME}.gem}
 end
 
-
-#
-# Website tasks using webgen
-#
-
+##############################################################################
+# Website tasks (website generated using webgen)
+##############################################################################
 desc "Generate and upload website files"
 task :website => [:generate_website, :upload_website, :generate_rdoc, :upload_rdoc]
 
